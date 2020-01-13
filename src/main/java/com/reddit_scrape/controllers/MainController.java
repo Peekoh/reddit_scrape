@@ -16,7 +16,7 @@ public class MainController {
 	}
 
 	@GetMapping("/")
-	public String Index(Model model) {
+	public String Index() {
 		return "index.jsp";
 	}
 
