@@ -1,8 +1,10 @@
 document.getElementById("form").addEventListener("submit", function (e) {
     e.preventDefault();
+    showLoadingDiv();
     $.ajax({
         url: `/scrape/${document.getElementById("subreddit").value}/${document.getElementById("search-text").value}`,
         success: function (d) {
+        	clearResultDivs();
             let data = d;
             let count = 0;
             for (let i = 0; i < data.length; i++) {
@@ -17,6 +19,17 @@ document.getElementById("form").addEventListener("submit", function (e) {
         },
         error: function (err) {
             console.log(err);
+        	clearResultDivs();
+
         }
     });
 })
+clearResultDivs = () => {
+	$('#results').empty();
+	$("#count").empty();
+}
+showLoadingDiv = () => {
+	clearResultDivs();
+	let img = $("<img src='img/loading.gif' class='loading-img'/>")
+	$("#count").append(img);
+}
